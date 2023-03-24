@@ -1,0 +1,5 @@
+*.pyc
+cache
+python-version
+.env
+.upload-folder
