@@ -4,27 +4,28 @@
   <p class="text-muted">A simple uploading tool made by @sdelquin</p>
 </div>
 <div class="row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <form method="post" enctype="multipart/form-data">
-      <div class="input-group">
-        <input
-          type="file"
-          class="form-control"
-          id="inputGroupFile04"
-          aria-describedby="upload-file"
-          aria-label="Upload"
-          name="file"
-          required
-        />
-        <button class="btn btn-primary" type="submit" id="upload-file">
+      <div class="mb-3">
+        <label for="formFile" class="form-label">Your file:</label>
+        <input class="form-control" type="file" id="formFile" name="file" required>
+      </div>
+      <div class="mb-3">
+        <label for="inputPassword5" class="form-label">Your name:</label>
+        <input type="text" name="name" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" required>
+        <div id="passwordHelpBlock" class="form-text">
+          Do not include surname! Only your first name...
+        </div>
+      </div>
+      <div class="mb-3">
+        <button type="submit" class="btn btn-primary mb-3">
+          <i class="bi bi-cloud-upload"></i>
           Upload
         </button>
       </div>
     </form>
   </div>
-</div>
-<div class="row">
-  <div class="col-md-3 text-center">
+  <div class="col-md-4 col-sm-8 text-center">
     <img
       class="hero-image"
       src="{{ url_for('static', filename='upload-story.svg') }}"
