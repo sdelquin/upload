@@ -1,6 +1,15 @@
+body {
+  padding-top: 2rem;
+}
+
+img.hero-image {
+  width: 100%;
+}
+
 div.credits {
   font-size: x-small;
 }
+
 div.credits a {
   color: lightgray;
 }
