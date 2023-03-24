@@ -1,6 +1,6 @@
 *.pyc
 cache
-python-version
+.python-version
 .env
 .upload-folder
 .DS_Store
