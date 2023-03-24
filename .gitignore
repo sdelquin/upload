@@ -3,3 +3,5 @@ cache
 python-version
 .env
 .upload-folder
+.DS_Store
+.prettierignore
