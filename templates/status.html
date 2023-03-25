@@ -1,6 +1,16 @@
 {% extends "base.html" %}
 {% block container %}
   <h1>Status</h1>
-  <p><i class="bi bi-check2-circle text-success"></i> Your file <code>{{ filename }}</code> has been <strong>successfully uploaded</strong>!</p>
+
+  <p>
+  {% if error %}
+      <i class="bi bi-x-square text-danger"></i> {{ error }}!
+  {% else %}
+      <i class="bi bi-check-square text-success"></i>
+      Your file <code>{{ upload_filename }}</code> has been <strong>successfully uploaded</strong>
+      to bucket <code>{{ bucket }}</code>!
+  {% endif %}
+  </p>
+
   <p><i class="bi bi-arrow-clockwise"></i> <a href="{{ url_for('upload_file') }}">Upload more files</a></p>
 {% endblock %}

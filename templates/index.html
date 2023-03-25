@@ -6,17 +6,57 @@
 <div class="row">
   <div class="col-md-5">
     <form method="post" enctype="multipart/form-data">
+      {# File #}
       <div class="mb-3">
-        <label for="formFile" class="form-label">Your file:</label>
+        <label for="formFile" class="form-label">
+          <i class="bi bi-file-earmark-plus"></i>
+          Your file:
+        </label>
         <input class="form-control" type="file" id="formFile" name="file" required>
+        <div class="form-text">
+          Allowed extensions: {{ ', '.join(allowed_extensions) }}
+        </div>
       </div>
+
+      {# Name #}
       <div class="mb-3">
-        <label for="inputPassword5" class="form-label">Your name:</label>
-        <input type="text" name="name" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" required>
-        <div id="passwordHelpBlock" class="form-text">
+        <label for="name" class="form-label">
+          <i class="bi bi-person"></i>
+          Your name:
+        </label>
+        <input type="text" name="name" id="name" class="form-control" required>
+        <div class="form-text">
           Do not include surname! Only your first name...
         </div>
       </div>
+
+      {# Password #}
+      <div class="mb-3">
+        <label for="password" class="form-label">
+          <i class="bi bi-key"></i>
+          Your password:
+        </label>
+        <input type="password" name="password" id="password" class="form-control" required>
+      </div>
+
+      {# Bucket #}
+      <div class="mb-3">
+        <label for="bucket" class="form-label">
+          <i class="bi bi-bucket"></i>
+          Your bucket:
+        </label>
+        <select type="text" name="bucket" id="bucket" class="form-select" required>
+          <option disabled selected value> -- Select bucket -- </option>
+          {% for bucket in buckets %}
+            <option value="{{ bucket }}">{{ bucket }}</option>
+          {% endfor %}
+        </select>
+        <div class="form-text">
+          Files with same name and bucket will be overwritten
+        </div>
+      </div>
+
+      {# Button #}
       <div class="mb-3">
         <button type="submit" class="btn btn-primary mb-3">
           <i class="bi bi-cloud-upload"></i>

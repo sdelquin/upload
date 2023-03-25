@@ -1,37 +1,35 @@
 # https://flask.palletsprojects.com/en/2.2.x/patterns/fileuploads/
-import os
 
-from flask import Flask, flash, redirect, render_template, request
+from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 
 import settings
+from lib import utils
 
 app = Flask(__name__)
-app.config['UPLOAD_FOLDER'] = settings.UPLOAD_FOLDER
-
-
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in settings.ALLOWED_EXTENSIONS
 
 
 @app.route('/', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return redirect(request.url)
         file = request.files['file']
-        name = request.form['name']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return redirect(request.url)
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            name = secure_filename(name.split()[0].lower())
-            filename = f'{name}_{filename}'
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return render_template('status.html', filename=filename)
-    return render_template('index.html')
+        if not utils.allowed_file(file.filename):
+            return render_template('status.html', error='Given filetype is not allowed')
+        bucket = request.form['bucket']
+        if not utils.check_bucket_password(request.form['password'], bucket):
+            return render_template('status.html', error='Wrong password')
+
+        filename = secure_filename(file.filename)
+        name = secure_filename(request.form['name'].split()[0].lower())
+        upload_filename = f'{name}_{filename}'
+        upload_folder = settings.UPLOAD_BASE_FOLDER / bucket
+        file.save(upload_folder / upload_filename)
+        return render_template(
+            'status.html', error=None, upload_filename=upload_filename, bucket=bucket
+        )
+
+    return render_template(
+        'index.html',
+        allowed_extensions=settings.ALLOWED_EXTENSIONS,
+        buckets=settings.BUCKETS.keys(),
+    )
