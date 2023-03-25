@@ -14,22 +14,24 @@ def upload_file():
     if request.method == 'POST':
         file = request.files['file']
         if not utils.allowed_file(file.filename):
-            return render_template('status.html', error='Given filetype is not allowed')
-        bucket = request.form['bucket']
-        if not utils.check_bucket_password(request.form['password'], bucket):
-            return render_template('status.html', error='Given password is incorrect')
+            return render_template(
+                'status.html', error='El tipo de fichero subido no está permitido'
+            )
+        context = request.form['context']
+        if not utils.check_context_password(request.form['password'], context):
+            return render_template('status.html', error='La contraseña es incorrecta')
 
         filename = secure_filename(file.filename)
         name = secure_filename(request.form['name'].split()[0].lower())
         upload_filename = f'{name}_{filename}'
-        upload_folder = settings.UPLOAD_BASE_FOLDER / bucket
+        upload_folder = settings.UPLOAD_BASE_FOLDER / context
         file.save(upload_folder / upload_filename)
         return render_template(
-            'status.html', error=None, upload_filename=upload_filename, bucket=bucket
+            'status.html', error=None, upload_filename=upload_filename, context=context
         )
 
     return render_template(
         'index.html',
         allowed_extensions=settings.ALLOWED_EXTENSIONS,
-        buckets=settings.BUCKETS.keys(),
+        contexts=settings.CONTEXTS.keys(),
     )

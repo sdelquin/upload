@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block container %}
 <div class="row">
-  <h1>Upload new file</h1>
-  <p class="text-muted">A simple uploading tool made by @sdelquin</p>
+  <h1>Subir nuevo fichero</h1>
+  <p class="text-muted small">Una sencilla herramienta de subida de ficheros hecha con <i class="bi bi-heart"></i> por @sdelquin</p>
 </div>
 <div class="row">
   <div class="col-md-5">
@@ -10,11 +10,11 @@
       <div class="mb-3">
         <label for="formFile" class="form-label">
           <i class="bi bi-file-earmark-plus"></i>
-          Your file:
+          Tu fichero:
         </label>
         <input class="form-control" type="file" id="formFile" name="file" required>
         <div class="form-text">
-          Allowed extensions: {{ ', '.join(allowed_extensions) }}
+          Extensiones permitidas: {{ ', '.join(allowed_extensions) }}
         </div>
       </div>
 
@@ -22,11 +22,11 @@
       <div class="mb-3">
         <label for="name" class="form-label">
           <i class="bi bi-person"></i>
-          Your name:
+          Tu nombre:
         </label>
         <input type="text" name="name" id="name" class="form-control" required>
         <div class="form-text">
-          Do not include surname! Only your first name...
+          No incluyas apellido! Sólo tu nombre de pila...
         </div>
       </div>
 
@@ -34,25 +34,25 @@
       <div class="mb-3">
         <label for="password" class="form-label">
           <i class="bi bi-key"></i>
-          Your password:
+          Tu contraseña:
         </label>
         <input type="password" name="password" id="password" class="form-control" required>
       </div>
 
-      {# Bucket #}
+      {# Context #}
       <div class="mb-3">
-        <label for="bucket" class="form-label">
-          <i class="bi bi-bucket"></i>
-          Your bucket:
+        <label for="context" class="form-label">
+          <i class="bi bi-context"></i>
+          Tu contexto:
         </label>
-        <select type="text" name="bucket" id="bucket" class="form-select" required>
-          <option disabled selected value> -- Select bucket -- </option>
-          {% for bucket in buckets %}
-            <option value="{{ bucket }}">{{ bucket }}</option>
+        <select type="text" name="context" id="context" class="form-select" required>
+          <option disabled selected value> --- </option>
+          {% for context in contexts %}
+            <option value="{{ context }}">{{ context }}</option>
           {% endfor %}
         </select>
         <div class="form-text">
-          Files with same name and bucket will be overwritten
+          Los ficheros con mismo nombre y contexto será sobreescritos
         </div>
       </div>
 
@@ -60,7 +60,7 @@
       <div class="mb-3">
         <button type="submit" class="btn btn-primary mb-3">
           <i class="bi bi-cloud-upload"></i>
-          Upload
+          Subir
         </button>
       </div>
     </form>

@@ -7,7 +7,7 @@ def allowed_file(
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in allowed_extensions
 
 
-def check_bucket_password(
-    given_password: str, bucket: str, buckets: dict[str, str] = settings.BUCKETS
+def check_context_password(
+    given_password: str, context: str, contexts: dict[str, str] = settings.CONTEXTS
 ) -> bool:
-    return given_password == buckets[bucket]
+    return given_password == contexts[context]
