@@ -4,9 +4,9 @@
 
   <p>
   {% if error %}
-      <i class="bi bi-x-square text-danger"></i> {{ error }}!
+      <i class="bi bi-x-square-fill text-danger"></i> {{ error }}!
   {% else %}
-      <i class="bi bi-check-square text-success"></i>
+      <i class="bi bi-check-square-fill text-success"></i>
       Your file <code>{{ upload_filename }}</code> has been <strong>successfully uploaded</strong>
       to bucket <code>{{ bucket }}</code>!
   {% endif %}
