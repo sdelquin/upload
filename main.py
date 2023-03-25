@@ -17,7 +17,7 @@ def upload_file():
             return render_template('status.html', error='Given filetype is not allowed')
         bucket = request.form['bucket']
         if not utils.check_bucket_password(request.form['password'], bucket):
-            return render_template('status.html', error='Wrong password')
+            return render_template('status.html', error='Given password is incorrect')
 
         filename = secure_filename(file.filename)
         name = secure_filename(request.form['name'].split()[0].lower())
