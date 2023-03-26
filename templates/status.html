@@ -4,11 +4,11 @@
 
   <p>
   {% if error %}
-      <i class="bi bi-x-square-fill text-danger"></i> {{ error }}!
+      <i class="bi bi-x-square-fill text-danger"></i> {{ error }}.
   {% else %}
       <i class="bi bi-check-square-fill text-success"></i>
       El fichero <code>{{ upload_filename }}</code> se ha <strong>subido satisfactoriamente</strong>
-      al contexto <code>{{ context }}</code>!
+      al contexto <code>{{ context.name }}</code>.
   {% endif %}
   </p>
 

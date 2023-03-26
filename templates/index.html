@@ -48,7 +48,7 @@
         <select type="text" name="context" id="context" class="form-select" required>
           <option disabled selected value> --- </option>
           {% for context in contexts %}
-            <option value="{{ context }}">{{ context }}</option>
+            <option value="{{ context.name }}">{{ context.description }}</option>
           {% endfor %}
         </select>
         <div class="form-text">

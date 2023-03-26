@@ -1,5 +1,8 @@
 dev:
     flask --app main.py --debug run
 
-clean:
-    rm -fr target
+delete_db:
+    rm -f upload.db
+
+create_db:
+    cat create_db.sql | sqlite3 upload.db
