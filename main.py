@@ -25,7 +25,7 @@ def upload_file():
 
         filename = Path(secure_filename(file.filename))
         name = secure_filename(request.form['name'].split()[0].lower())
-        upload_filename = f'{filename.stem}_{name}{filename.suffix}'
+        upload_filename = f'{filename.stem}-{name}{filename.suffix}'
         file.save(os.path.join(context.folder, upload_filename))
         return render_template(
             'status.html', error=None, upload_filename=upload_filename, context=context
